@@ -1,73 +1,40 @@
-# React + TypeScript + Vite
+# Counter App 🔢
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A simple React application built to learn the fundamentals of state management and event handling.
 
-Currently, two official plugins are available:
+## Features
+- **Increase/Decrease:** Adjust the counter value.
+- **Safety Check:** The "Decrease" button is disabled when the count is 0 to prevent negative numbers.
+- **Reset:** Quickly return the counter to 0.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## What I Learnt
 
-## React Compiler
+This was my first project as I started learning React. Here are the key concepts I've mastered:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### 1. `useState`
+I learned how to store and manage "state" (data that changes over time) inside a component.
+```javascript
+const [count, setCount] = useState(0);
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 2. State Updates
+I discovered two ways to update state and why the functional approach is better:
+- **Basic:** `setCount(count + 1);`
+- **Recommended:** `setCount(prev => prev + 1);`
+- **Why?** React updates state asynchronously. Using the `prev` (previous) value ensures that I am always working with the most up-to-date state, preventing bugs in faster or complex interactions.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### 3. Event Handling
+I learned how to use the `onClick` attribute to trigger JavaScript functions when a user interacts with the UI.
+```javascript
+<button onClick={() => setCount(0)}>Reset</button>
 ```
+
+### 4. Conditional Rendering & UI Behavior
+I learned how to make the UI "smart" by changing its behavior based on the current state.
+- **Example:** Disabling a button when a condition is met.
+```javascript
+<button disabled={count === 0}>Decrease</button>
+```
+
+---
+*Built with React, TypeScript, and Vite.*
